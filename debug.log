@@ -1,0 +1,4 @@
+[1221/094716.467:ERROR:directory_reader_win.cc(43)] FindFirstFile: Impossibile trovare il percorso specificato. (0x3)
+[1221/094716.470:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\UTENTE\AppData\Local\AVAST Software\Browser\User Data\Crashpad\attachments\f19d16af-5e71-4acb-a831-7bdac71dcda1: Impossibile trovare il percorso specificato. (0x3)
+[1221/160527.936:ERROR:directory_reader_win.cc(43)] FindFirstFile: Impossibile trovare il percorso specificato. (0x3)
+[1223/204144.074:ERROR:directory_reader_win.cc(43)] FindFirstFile: Impossibile trovare il percorso specificato. (0x3)

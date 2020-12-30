@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/space_background.png" type="Texture" id=3]
+[ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 1920, 8, 0, 0, 0, 0, 1920, 1072, 0, 0, 0, 0, 0, 1072, 0, 0, 0, 0, 0, 8 )
+}
+
+[node name="Main" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )
+rock = ExtResource( 4 )
+enemy = ExtResource( 6 )
+
+[node name="Backgroud" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_scale = Vector2( 0.6, 0.6 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 3
+flip_h = true
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="RockPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="RockSpawn" type="PathFollow2D" parent="RockPath"]
+position = Vector2( 0, 8 )
+
+[node name="Rocks" type="Node" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="SpawnPlayer" type="Position2D" parent="."]
+position = Vector2( 512, 320 )
+
+[node name="EnemyTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="dead" from="Player" to="." method="game_over"]
+[connection signal="lives_changed" from="Player" to="HUD" method="update_lives"]
+[connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
