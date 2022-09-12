@@ -68,11 +68,12 @@ _global_script_class_icons={
 
 [application]
 
-config/name="03 SpaceRocks"
+config/name="SpaceRocks"
 run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://rocket-solid.svg"
 company_name="LudoDex Games"
 author="Emanuele Marchesi as Jhoe Drake"
+file_version="1.0.0"
 
 [input]
 

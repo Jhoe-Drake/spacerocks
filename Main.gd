@@ -38,6 +38,7 @@ func new_level():
 	$HUD.update_wave(wave)
 	yield($HUD/MessageTimer,"timeout")
 	
+# warning-ignore:unused_variable
 	for i in range(level):
 		spawn_rock(3)
 	
@@ -90,11 +91,13 @@ func _ready():
 	screensize = get_viewport().get_visible_rect().size
 	$Player.screensize =screensize
 	$Player.hide()
+# warning-ignore:unused_variable
 	for i in range(3):
 		spawn_rock(3)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+# warning-ignore:unused_argument
 func _process(delta):
 	$HUD.update_timer($WaveTimer.time_left)
 	pass
