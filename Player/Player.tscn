@@ -6,7 +6,7 @@
 [ext_resource path="res://Environment/Explosion.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 37.4027
+radius = 28.3974
 
 [node name="Player" type="RigidBody2D"]
 pause_mode = 1
@@ -41,6 +41,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Explosion" parent="." instance=ExtResource( 4 )]
+
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="InvTimer" to="." method="_on_InvTimer_timeout"]

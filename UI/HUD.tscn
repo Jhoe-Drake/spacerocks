@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/kenvector_future_thin.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/player_small.png" type="Texture" id=2]
@@ -7,6 +7,14 @@
 [ext_resource path="res://UI/HUD.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
+size = 46
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 46
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 46
 font_data = ExtResource( 1 )
 
@@ -21,6 +29,8 @@ script = ExtResource( 5 )
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 margin_bottom = 187.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -33,40 +43,66 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1004.0
-margin_bottom = 167.0
+margin_bottom = 73.0
+size_flags_vertical = 0
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer"]
-margin_right = 33.0
-margin_bottom = 109.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
+margin_right = 325.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 2
 custom_fonts/font = SubResource( 1 )
-text = "0
-"
+text = "0"
 valign = 1
 
+[node name="WaveTimer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 329.0
+margin_right = 653.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="timer_label" type="Label" parent="MarginContainer/HBoxContainer/WaveTimer"]
+margin_right = 254.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 3 )
+text = "Wave 00 : "
+
+[node name="time" type="Label" parent="MarginContainer/HBoxContainer/WaveTimer"]
+margin_left = 258.0
+margin_right = 324.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 4 )
+text = "00"
+
 [node name="LivesCounter" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 862.0
+margin_left = 658.0
 margin_right = 984.0
-margin_bottom = 147.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 2
 
 [node name="L1" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesCounter"]
-margin_right = 38.0
-margin_bottom = 147.0
+margin_left = 204.0
+margin_right = 242.0
+margin_bottom = 41.0
 texture = ExtResource( 2 )
 stretch_mode = 3
 
 [node name="L2" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesCounter"]
-margin_left = 42.0
-margin_right = 80.0
-margin_bottom = 147.0
+margin_left = 246.0
+margin_right = 284.0
+margin_bottom = 41.0
 texture = ExtResource( 2 )
 stretch_mode = 3
 
 [node name="L3" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesCounter"]
-margin_left = 84.0
-margin_right = 122.0
-margin_bottom = 147.0
+margin_left = 288.0
+margin_right = 326.0
+margin_bottom = 41.0
 texture = ExtResource( 2 )
 stretch_mode = 3
 
@@ -101,5 +137,6 @@ __meta__ = {
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

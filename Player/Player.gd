@@ -136,3 +136,5 @@ func _on_Player_body_entered(body):
 	if body.is_in_group("rocks") and ship_state == States.ALIVE:
 		body.explode()
 		explode()
+		
+

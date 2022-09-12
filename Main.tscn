@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Enemy/EnemyPaths.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -49,8 +50,15 @@ position = Vector2( 512, 320 )
 
 [node name="EnemyTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="EnemyPaths" parent="." instance=ExtResource( 7 )]
+
 [connection signal="dead" from="Player" to="." method="game_over"]
 [connection signal="lives_changed" from="Player" to="HUD" method="update_lives"]
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

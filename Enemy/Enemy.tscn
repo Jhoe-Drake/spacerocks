@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/enemy_saucer.png" type="Texture" id=1]
 [ext_resource path="res://Environment/Explosion.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=3]
-[ext_resource path="res://Enemy/EnemyPaths.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Weapons/Bullet/EnemyBullet.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -43,9 +42,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[node name="Enemy" type="Area2D" groups=[
-"enemies",
-]]
+[node name="Enemy" type="Area2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource( 3 )
@@ -73,11 +70,10 @@ frame = 25
 wait_time = 1.5
 autostart = true
 
-[node name="EnemyPaths" parent="." instance=ExtResource( 4 )]
-
 [node name="Muzzle" type="Position2D" parent="."]
 
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_Enemy_body_entered"]
 [connection signal="animation_finished" from="Explosion/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
