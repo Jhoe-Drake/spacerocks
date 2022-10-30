@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/explosion 3.png" type="Texture" id=1]
+[ext_resource path="res://assets/sounds/explosion_large_07.wav" type="AudioStream" id=2]
+[ext_resource path="res://Environment/Explosion.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Explosion"
@@ -20,6 +22,7 @@ tracks/0/keys = {
 }
 
 [node name="Explosion" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -28,3 +31,6 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Explosion = SubResource( 1 )
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )

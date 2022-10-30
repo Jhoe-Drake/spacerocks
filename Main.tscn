@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemy/EnemyPaths.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sounds/Funky-Gameplay_Looping.ogg" type="AudioStream" id=8]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -55,6 +56,10 @@ one_shot = true
 wait_time = 30.0
 
 [node name="EnemyPaths" parent="." instance=ExtResource( 7 )]
+
+[node name="soundtrack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
 
 [connection signal="dead" from="Player" to="." method="game_over"]
 [connection signal="lives_changed" from="Player" to="HUD" method="update_lives"]

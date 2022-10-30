@@ -1,6 +1,6 @@
 extends Area2D
 signal shoot
-signal ecploded
+signal exploded
 
 class_name Enemy
 
@@ -19,6 +19,7 @@ func shoot():
 	dir = dir.rotated(rand_range(-.1,.1)).angle()
 	#emit_signal("shoot",bullet,global_position,dir)
 	emit_signal("shoot",bullet,$Muzzle.global_position,dir)
+	$laser_beam.play()
 	
 func shoot_pulse(n,delay):
 		for i in range(n):
@@ -30,8 +31,12 @@ func take_damage(amount):
 	$AnimationPlayer.play("flash")
 	if health <= 0:
 		explode()
+	else:
+		$damage_sound.play()
+	
 	yield($AnimationPlayer,"animation_finished")
 	$AnimationPlayer.play("rotate")
+	
 	
 func explode():
 	speed = 0
@@ -40,8 +45,8 @@ func explode():
 	$Sprite.hide()
 	$Explosion.show()
 	$Explosion/AnimationPlayer.play("Explosion")
-	$ExplosionSound.play()
-	emit_signal("ecploded")
+	$Explosion.explode()
+	emit_signal("exploded")
 
 func spawn(path,trgt):
 	$Explosion.hide()
@@ -54,12 +59,6 @@ func spawn(path,trgt):
 	pass
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	$Sprite.frame = randi() % 3
-#	var path_count = $EnemyPaths.get_child_count()
-#	var path = $EnemyPaths.get_children()[randi() % path_count]
-#	follow = PathFollow2D.new()
-#	path.add_child(follow)
-#	follow.loop = false
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

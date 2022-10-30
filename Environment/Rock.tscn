@@ -7,9 +7,7 @@
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
 
-[node name="Rock" type="RigidBody2D" groups=[
-"rocks",
-]]
+[node name="Rock" type="RigidBody2D" groups=["rocks"]]
 pause_mode = 1
 collision_layer = 2
 collision_mask = 9
@@ -19,14 +17,13 @@ linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="." groups=[
-"rocks",
-]]
+[node name="Sprite" type="Sprite" parent="." groups=["rocks"]]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Explosion" parent="." instance=ExtResource( 3 )]
+
 [connection signal="animation_finished" from="Explosion/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Explosion"]

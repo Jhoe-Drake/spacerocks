@@ -43,11 +43,19 @@ func _ready():
 	$GunTimer.wait_time = fire_rate
 
 func explode():
+	if ship_state == States.DEAD:
+		return
+		
+	if $Sounds/engine_sound.playing:
+		$Sounds/engine_sound.stop()
+	
 	$Explosion.show()
 	$Explosion/AnimationPlayer.play("Explosion")
+	$Explosion.explode()
 	self.lives -= 1
 	if lives <= 0:
 		change_state(States.DEAD)
+		
 	else:
 		change_state(States.INVULNERABLE)
 		
@@ -96,6 +104,13 @@ func change_state(new_state):
 		
 	ship_state = new_state
 
+func thruster(state):
+	if state:
+		if not $Sounds/engine_sound.playing:
+			$Sounds/engine_sound.play()
+	else:
+		$Sounds/engine_sound.stop()
+	
 func get_input():
 	thrust = Vector2()
 	if ship_state in [States.DEAD,States.INIT]:
@@ -103,19 +118,28 @@ func get_input():
 	
 	if Input.is_action_pressed("thrust"):
 		thrust = Vector2(engine_power,0)
+		thruster(true)
+	if Input.is_action_just_released("thrust"):
+		thruster(false)
+	
 	
 	rotation_dir = 0
 	if Input.is_action_pressed("rotate_right"):
 		rotation_dir +=1
 	if Input.is_action_pressed("rotate_left"):
 		rotation_dir -=1
+		
 	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot()
 
 func shoot():
 	if ship_state == States.INVULNERABLE:
 		return
+	if ship_state == States.DEAD:
+		return
+			
 	emit_signal("shoot",bullet,$Muzzle.global_position,rotation)
+	$Sounds/laser_beam.play()
 	can_shoot = false
 	$GunTimer.start()
 
@@ -133,8 +157,13 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_Player_body_entered(body):
+	if ship_state == States.DEAD:
+		return
+		
 	if body.is_in_group("rocks") and ship_state == States.ALIVE:
 		body.explode()
 		explode()
+	else:
+		$Sounds/take_damage.play()
 		
 

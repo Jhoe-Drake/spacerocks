@@ -52,6 +52,7 @@ func new_level():
 func game_over():
 	playing = false
 	$WaveTimer.stop()
+	$EnemyTimer.stop()
 	
 	$HUD.show_message("Game Over!")
 	$HUD.game_over()
@@ -111,6 +112,7 @@ func _on_Enemy_exploded():
 	score +=25
 	$HUD.update_score(score)
 	pass
+
 func _on_Rock_exploded(size,radius,pos,vel):
 	if(size <= 1):
 		score += 10

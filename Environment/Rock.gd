@@ -31,6 +31,7 @@ func explode():
 	$Sprite.hide()
 	$Explosion/AnimationPlayer.play("Explosion")
 	emit_signal("exploded",size,radius,position,linear_velocity)
+	$Explosion.explode()
 	linear_velocity = Vector2()
 	angular_velocity = 0
 
